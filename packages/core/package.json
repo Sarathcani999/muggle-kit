@@ -6,9 +6,10 @@
     "build": "tsc"
   },
   "exports": {
-    "./add": {
-      "types": "./src/add.ts",
-      "default": "./dist/add.js"
+    "./mugglekit": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
     }
   },
   "devDependencies": {
