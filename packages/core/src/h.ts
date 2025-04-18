@@ -1,5 +1,7 @@
 import { withoutNulls } from "./utils/array";
 
+export type DOMType = (typeof DOM_TYPES)[keyof typeof DOM_TYPES];
+
 export const DOM_TYPES = {
   TEXT: "text",
   ELEMENT: "element",
