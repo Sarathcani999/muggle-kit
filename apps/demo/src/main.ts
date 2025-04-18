@@ -1,9 +1,10 @@
 import { createApp } from "@repo/core/mugglekit";
-import App from "./App";
+import view from "./App";
+import { initialState as state, reducers } from "./store/state";
 
 const root = document.querySelector<HTMLDivElement>("#root");
 
 if (root) {
-  const { mount } = createApp({state: { todos: ["Clean the room"] }, view: App})
+  const { mount } = createApp({ state, view, reducers });
   mount(root);
 }
