@@ -2,53 +2,66 @@ import { destroyDOM } from "./destroy-dom";
 import { Dispatcher } from "./dispatcher";
 import { mountDOM } from "./mount-dom";
 
-type State = Record<string, any>;
-type Payload = any;
-type Reducer = (state: State, payload: Payload) => State;
-type ViewFunction = (state: State) => any;
+// Type for a reducer function
+type Reducer<T> = (state: T, payload: any) => T;
 
-interface AppConfig {
-  state: State;
-  view: ViewFunction;
+// Map of reducer functions
+type ReducersMap<T> = {
+  [action: string]: Reducer<T>;
+};
+
+// Type for the view function
+type ViewFunction<T> = (
+  state: T,
+  emit: (eventName: string, payload?: any) => void,
+) => any;
+
+interface CreateAppOptions<T> {
+  state: T;
+  view: ViewFunction<T>;
+  reducers?: ReducersMap<T>;
 }
-
-interface App {
-  mount: (parentEl: HTMLElement) => void;
-}
-
-// Assuming reducers is a global or imported object
-declare const reducers: Record<string, Reducer>;
 
 /**
- * Creates an application instance with reactive rendering and command dispatching.
- * 
- * @param config - Object containing initial state and view function.
- * @returns An object with a `mount` method to mount the app to a DOM element.
+ * Creates a lightweight app instance with a reactive event system and virtual DOM rendering.
  */
-export function createApp({ state, view }: AppConfig): App {
+export function createApp<T>({
+  state,
+  view,
+  reducers = {},
+}: CreateAppOptions<T>) {
   let parentEl: HTMLElement | null = null;
   let vdom: any = null;
 
   const dispatcher = new Dispatcher();
-  const subscriptions = [dispatcher.afterEveryCommand(renderApp)];
+  const subscriptions: Array<() => void> = [
+    dispatcher.afterEveryCommand(renderApp),
+  ];
 
-  // Subscribe all reducer functions to their corresponding action names
+  /**
+   * Emits an event to the internal dispatcher with an optional payload.
+   */
+  function emit(eventName: string, payload?: any) {
+    dispatcher.dispatch(eventName, payload);
+  }
+
+  // Register reducers to handle dispatched actions
   for (const actionName in reducers) {
-    const reducer = reducers[actionName] as Reducer;
-    const subs = dispatcher.subscribe(actionName, (payload: Payload) => {
+    const reducer = reducers[actionName] as Reducer<T>;
+    const subs = dispatcher.subscribe(actionName, (payload: any) => {
       state = reducer(state, payload);
     });
     subscriptions.push(subs);
   }
 
   /**
-   * Renders the current state to the DOM by destroying the old virtual DOM and mounting the new one.
+   * Renders the virtual DOM using the current state.
    */
-  function renderApp(): void {
+  function renderApp() {
     if (vdom) {
       destroyDOM(vdom);
     }
-    vdom = view(state);
+    vdom = view(state, emit);
     if (parentEl) {
       mountDOM(vdom, parentEl);
     }
@@ -56,13 +69,23 @@ export function createApp({ state, view }: AppConfig): App {
 
   return {
     /**
-     * Mounts the application to the given DOM element and triggers the initial render.
-     *
-     * @param _parentEl - The parent DOM element where the app will be rendered.
+     * Mounts the app to the provided DOM element.
+     * @param _parentEl The DOM element where the app should be mounted.
      */
-    mount(_parentEl: HTMLElement): void {
+    mount(_parentEl: HTMLElement) {
       parentEl = _parentEl;
       renderApp();
+    },
+
+    /**
+     * Unmounts the app and cleans up subscriptions and virtual DOM.
+     */
+    unmount() {
+      if (vdom) {
+        destroyDOM(vdom);
+        vdom = null;
+      }
+      subscriptions.forEach((unsubscribe) => unsubscribe());
     },
   };
 }

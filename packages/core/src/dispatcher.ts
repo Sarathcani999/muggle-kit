@@ -27,7 +27,9 @@ export class Dispatcher {
 
   dispatch(commandName: string, payload: any) {
     if (this.#subs.has(commandName)) {
-      this.#subs.get(commandName).forEach((handler: Function) => handler(payload));
+      this.#subs
+        .get(commandName)
+        .forEach((handler: Function) => handler(payload));
     } else {
       console.warn(`No handlers for command: ${commandName}`);
     }
