@@ -1,5 +1,3 @@
-import { add } from "@repo/core/add";
-
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <p>
