@@ -4,14 +4,14 @@ import TodoList from "./components/TodoList";
 
 const App = (state: any, emit: any) => {
   const handleClick = () => {
-    emit("add", "New todo");
+    emit("add", state.newTodo);
   };
 
   return hFragment([
     h("h1", {}, ["My TODOs"]),
-    CreateTodo(),
+    CreateTodo(state, emit),
     TodoList(state),
-    h("button", { onclick: handleClick }, ["Log State"]),
+    h("button", { onclick: handleClick }, ["Add todo"]),
   ]);
 };
 
