@@ -14,8 +14,10 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc -p tsconfig.build.json"
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "publish-dry": "npm publish --dry-run",
+    "publish": "npm publish --access public"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
