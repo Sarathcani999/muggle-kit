@@ -1,16 +1,21 @@
 {
-  "name": "@repo/core",
+  "name": "@sarathcani999/mugglekit",
+  "version": "1.0.3",
+  "description": "Core utilities and components for the Muggle Kit monorepo",
   "type": "module",
-  "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc"
-  },
   "exports": {
-    "./mugglekit": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts",
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc -p tsconfig.build.json"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
@@ -20,5 +25,16 @@
     "type": "git",
     "url": "https://github.com/Sarathcani999/muggle-kit.git",
     "directory": "packages/core"
+  },
+  "author": "Sarath C Ani mailsforsarath98@gmail.com",
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "core",
+    "utilities",
+    "mugglekit"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
