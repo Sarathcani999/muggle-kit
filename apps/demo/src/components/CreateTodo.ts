@@ -1,4 +1,4 @@
-import { h } from "@repo/core/mugglekit";
+import { h } from "@sarathcani999/mugglekit";
 import { State } from "../store/state";
 
 const CreateTodo = (state: State, emit: Function) => {

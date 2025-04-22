@@ -1,4 +1,4 @@
-import { h } from "@repo/core/mugglekit";
+import { h } from "@sarathcani999/mugglekit";
 import TodoItem from "./TodoItem";
 
 const TodoList = (state: any) => {

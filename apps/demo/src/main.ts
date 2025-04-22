@@ -1,4 +1,4 @@
-import { createApp } from "@repo/core/mugglekit";
+import { createApp } from "@sarathcani999/mugglekit";
 import view from "./App";
 import { initialState as state, reducers } from "./store/state";
 

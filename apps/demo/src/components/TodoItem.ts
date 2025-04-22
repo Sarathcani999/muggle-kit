@@ -1,4 +1,4 @@
-import { h } from "@repo/core/mugglekit";
+import { h } from "@sarathcani999/mugglekit";
 
 const TodoItem = (todo: string, idxInList: number) => {
   return h("li", {}, [`No. ${idxInList}: ${todo}`]);

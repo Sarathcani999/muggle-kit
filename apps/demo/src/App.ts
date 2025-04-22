@@ -1,4 +1,4 @@
-import { h, hFragment } from "@repo/core/mugglekit";
+import { h, hFragment } from "@sarathcani999/mugglekit";
 import CreateTodo from "./components/CreateTodo";
 import TodoList from "./components/TodoList";
 
