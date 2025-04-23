@@ -1,6 +1,6 @@
 {
   "name": "@sarathcani999/mugglekit",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Core utilities and components for the Muggle Kit monorepo",
   "type": "module",
   "exports": {
@@ -16,8 +16,7 @@
   "scripts": {
     "dev": "tsc -p tsconfig.build.json --watch",
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
-    "publish-dry": "npm publish --dry-run",
-    "publish": "npm publish --access public"
+    "publish-dry": "npm publish --dry-run"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",
