@@ -58,7 +58,6 @@ export function createApp<T>({
    * Renders the virtual DOM using the current state.
    */
   function renderApp() {
-    console.log("rendering app (3)");
     if (vdom) {
       destroyDOM(vdom);
     }
