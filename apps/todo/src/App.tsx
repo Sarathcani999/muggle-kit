@@ -1,37 +1,6 @@
-
-// Simple component function
-function Button(props: { onClick?: () => void; children?: any }) {
-  return (
-    <button onclick={props.onClick} className="btn">
-      {props.children}
-    </button>
-  );
-}
-
-// Component with conditional rendering
-function UserProfile(props: { user?: { name: string; email: string } }) {
-  if (!props.user) {
-    return <div>No user found</div>;
-  }
-
-  return (
-    <div className="user-profile">
-      <h2>{props.user.name}</h2>
-      <p>{props.user.email}</p>
-    </div>
-  );
-}
-
-// Component with list rendering
-function TodoList(props: { items: string[] }) {
-  return (
-    <ul>
-      {props.items.map((item, index) => (
-        <li key={index}>{item}</li>
-      ))}
-    </ul>
-  );
-}
+import { Button } from './components/Button';
+import { UserProfile } from './components/UserProfile';
+import { TodoList } from './components/TodoList';
 
 // Main App component
 function App() {
@@ -57,7 +26,7 @@ function App() {
         
         {/* Component with event handler */}
         <Button onClick={handleClick}>
-          Click Me!
+          Click Meh!
         </Button>
         
         {/* Conditional rendering */}
