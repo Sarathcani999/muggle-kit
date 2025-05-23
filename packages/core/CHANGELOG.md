@@ -1,5 +1,11 @@
 # @sarathcani999/mugglekit
 
+## 2.1.0
+
+### Minor Changes
+
+- 113797e: Primary JSX integration completed
+
 ## 2.0.1
 
 ### Patch Changes
