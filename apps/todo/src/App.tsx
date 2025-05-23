@@ -35,7 +35,7 @@ function App() {
         {/* Mixed content */}
         <div>
           Static text mixed with <strong>dynamic content</strong>
-          {" and more text"}
+          {" and more text!!"}
         </div>
       </main>
     </div>
