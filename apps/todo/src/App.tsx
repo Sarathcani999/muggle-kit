@@ -1,9 +1,7 @@
-import { h, hFragment } from '@sarathcani999/mugglekit';
-
 export const App = () => {
   return hFragment([
     h('div', {}, [
-      h('h1', {}, ['Todo App']),
+      h('h3', {}, ['Todo App here']),
     ])
   ]);
 }; 
