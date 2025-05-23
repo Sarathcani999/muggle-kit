@@ -2,7 +2,7 @@
 // Simple component function
 function Button(props: { onClick?: () => void; children?: any }) {
   return (
-    <button onClick={props.onClick} className="btn">
+    <button onclick={props.onClick} className="btn">
       {props.children}
     </button>
   );
